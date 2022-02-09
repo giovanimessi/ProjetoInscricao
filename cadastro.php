@@ -43,13 +43,25 @@ require 'pages/header.php';
                                                 </div>
 
                                                 <div class="col-md-5">
-                                                    <div class="form-group">
-                                                    <input type="checkbox" name="liberar" class="port">
-                                                     <label>Portador de necessidades </label>
+                                                           <div class="form-group">
+                                                                  <input type="checkbox" name="liberar" class="port">
+                                                                    <label>Portador de necessidades </label>
 
+                                                                    <div class="lib" style="margin-top: 20px;display: none;">
 
+                                                                        <input type="radio" name="n">
+                                                                        <label>visual</label>
 
-                                                    </div>
+                                                                        <input type="radio" name="n">
+                                                                        <label>motora</label>
+
+                                                                        <input type="radio" name="n">
+                                                                        <label>mental</label>
+
+                                                                        <input type="radio" name="n">
+                                                                        <label>auditiva</label>
+                                                                    </div>
+                                                            </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group">
