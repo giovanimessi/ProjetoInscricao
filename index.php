@@ -14,9 +14,9 @@ require 'pages/header.php';
 <!-- Logotipo -->
 <div class="row" style=" margin-bottom: 10px;">
 </div>
-<!-- Layout 1 -->
+
 <div class="row">
-<!-- Coluna 1 - Layout 1 -->
+
 <div class="col-lg-7">
 <div class="row">
 
@@ -29,7 +29,7 @@ require 'pages/header.php';
         <h1>Informções?</h1>
         <p class="descricao-ajuda">.</p>
         <p class="descricao-ajuda">Para isso os participantes devem realizar o cadastro de acesso ao sistema</p>
-        <p class="descricao-ajuda"><strong>IMPORTANTE:</strong> para o recebimento é imprescindível que os dados. <strong><a target="_blank" href="http://www.uesc.br/transfexterna/index.php?item=conteudo_apresentacao.phpl" style="text-decoration: none; color: red;">Clique aqui para realizar a consulta</a></strong>, caso haja divergência seguir orientação para regularização, antes da prestação do serviço.</p>                                
+        <p class="descricao-ajuda"><strong>IMPORTANTE:</strong> para o recebimento é imprescindível que os dados. <strong><a target="_blank" href="http://www.uesc.br/transfexterna/index.php?item=conteudo_apresentacao.phpl" style="text-decoration: none; color: red;">Clique aqui para realizar a consulta</a></strong>, caso haja divergência seguir orientação para regularização, antes da prestação do serviço.</p>
         </div>
 
 </div>
@@ -89,7 +89,7 @@ require 'pages/header.php';
 <div class="col-lg-12">
 <a href="javascript:void(0);" onclick="Voltar();" style="text-decoration: none; color: gray;"><i class="fa fa-arrow-circle-o-left fa-3x" aria-hidden="true"></i></a>
 </div>
-</div>  
+</div>
 
 <!-- logo user -->
 <div class="row" style="margin-bottom: 10px;">
@@ -123,14 +123,14 @@ require 'pages/header.php';
 <div class="row" style="margin-bottom: 50px;">
 <div class="col-lg-12" style="text-align:right; margin-top: 10px; margin-right: 5px; ">
 </div>
-</div> 
-
 </div>
 
 </div>
 
+</div>
 
-</div>                
+
+</div>
 </div>
 </div>
 </div>

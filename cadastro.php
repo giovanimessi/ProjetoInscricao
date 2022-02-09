@@ -44,31 +44,23 @@ require 'pages/header.php';
 
                                                 <div class="col-md-5">
                                                     <div class="form-group">
-                                                        <label for="sexoFeminino">Sexo<span style="color:red">(*)</span></label><br>
-                                                        <input type="radio" name="sexo" id="SexoF" value="F"> <span>Feminino</span>
-                                                        <input type="radio" name="sexo" id="SexoM" value="M"> <span>Masculino</span>
+                                                    <input type="checkbox" name="liberar" class="port">
+                                                     <label>Portador de necessidades </label>
+
+
 
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group">
                                                     <label for="arquivos">Arquivos</label>
-			                                         <input type="file" name="arquivos[]" multiple /><br/>
+			                                         <input type="file" name="arquivos" multiple /><br/>
 
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="txtConfirmarSenha">Confirmar Senha <span class="validacao">(*)</span></label>
-                                                        <input type="password" id="txtConfirmarSenha" name="txtConfirmarSenha" onchange="clearvalidate(this, $('#lblValidarConfirmarSenha'))" class="form-control" placeholder="INSIRA SUA SENHA NOVAMENTE" aria-describedby="exampleInputEmail32" maxlength="30" onpaste="javascript: return false;">
-                                                        <span class="texto-validacao" id="lblValidarConfirmarSenha"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div class="col-md-6">
-                                              
+
                                                 <a href="javascript:void(0);" onclick="validate();" class="btn btn-success" id="btnCadastrar">Cadastrar </a>
                                                 <a href="/www/php/sysinfo/" id="btnSair" class="btn btn-warning">Sair</a>
                                                 <a href="/www/php/sysinfo/" id="btnvia" class="btn btn-primary">2ª via da Inscrição</a>
