@@ -1,93 +1,90 @@
 <?php
 require 'pages/header.php';
+require 'config.php';
 
 ?>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <!-- PAnel Group -->
-            <div class="panel-group" role="tablist" aria-multiselectable="true">
-                <div class="panel panel-default">
-                    <!-- Panel Conteudo -->
-                    <div id="pnlConteudo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="pnlCabecalho">
-                        <div class="panel-body">
-                            <div class="alert alert-danger" style="display: none;" id="divmensagem"></div>
-                                <!-- Formulário de Cadastro -->
-                                <form method="POST" name="frmCadastrar" id="frmCadastrar" enctype="multipart/form-data">
+<?php
+	require 'classes/usuarios.class.php';
+	$u = new Usuarios();
 
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h2><i class="fa fa-user" aria-hidden="true" style="margin-right: 10px;"></i> Usuário Não Cadastrado</h2>
-                                            <p>Não conseguimos identifica-lo, por favor realize o cadastro no sistema para ter acesso a inscrição de eventos.</p>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="txtCPF">CPF <span class="validacao">(*)</label>
-                                                        <input type="text" class="form-control" id="txtCPF" name="cpf" placeholder="Insira seu CPF" value="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="txtNome">Nome Completo <span class="validacao">(*)</span></label>
-                                                        <input type="text" id="txtNome" style="text-transform:uppercase" maxlength="255" name="txtNome" class="form-control"  placeholder="Insira seu nome completo">
+    if(isset($_POST['nome']) && !empty($_POST['nome'])){
+        $nome = addslashes($_POST['nome']);
+        $cpf = addslashes($_POST['cpf']);
 
-                                                    </div>
-                                                </div>
+        print_r($nome);
 
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="txtDataNascimento">Data de Nascimento <span class="validacao">(*)</span></label>
-                                                        <input type="text" id="txtDataNascimento" name="datadeNascimento" class="form-control" style="text-transform:uppercase" placeholder="dd/mm/aaaa">
+    }
 
-                                                    </div>
-                                                </div>
+	?>
+<form  method="POST" action="dados.php" enctype="multipart/form-data" id="validator" class="form-horizontal">
+<fieldset>
+<div class="panel panel-primary">
+    <div class="panel-heading">Inscrição</div>
 
-                                                <div class="col-md-5">
-                                                           <div class="form-group">
-                                                                  <input type="checkbox" name="liberar" class="port">
-                                                                    <label>Portador de necessidades </label>
-
-                                                                    <div class="lib" style="margin-top: 20px;display: none;">
-
-                                                                        <input type="radio" name="n">
-                                                                        <label>visual</label>
-
-                                                                        <input type="radio" name="n">
-                                                                        <label>motora</label>
-
-                                                                        <input type="radio" name="n">
-                                                                        <label>mental</label>
-
-                                                                        <input type="radio" name="n">
-                                                                        <label>auditiva</label>
-                                                                    </div>
-                                                            </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                    <label for="arquivos">Arquivos</label>
-			                                         <input type="file" name="arquivos" multiple /><br/>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-
-                                                <a href="javascript:void(0);" onclick="validate();" class="btn btn-success" id="btnCadastrar">Cadastrar </a>
-                                                <a href="/www/php/sysinfo/" id="btnSair" class="btn btn-warning">Sair</a>
-                                                <a href="/www/php/sysinfo/" id="btnvia" class="btn btn-primary">2ª via da Inscrição</a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                        </div>
-                    </div>
-                    <!-- Panel Conteudo -->
-                </div>
-            </div>
-        </div>
+    <div class="panel-body">
+<div class="form-group">
+    <div class="col-md-11 control-label">
+            <p class="help-block"><h11>*</h11> Campo Obrigatório </p>
     </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-2 control-label" for="Nome">Nome Completo  <h11>*</h11></label>  
+  <div class="col-md-8">
+  <input type="text" name="nome" class="form-control input-md" data-rules="min=2" />
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-2 control-label" for="Nome">CPF <h11>*</h11></label>  
+  <div class="col-md-2">
+  <input type="text" id="cpf" name="cpf" placeholder="Apenas números" class="form-control input-md" required="" maxlength="14"  Onkeypress="$(this).mask('000.000.000-00');">
+  </div>
+  
+  <label class="col-md-1 control-label" for="Nome">Nascimento<h11>*</h11></label>  
+  <div class="col-md-2">
+  <input id="dtnasc" name="dtnasc" class="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
+</div>
+
+
+    <div class="form-group">
+      <div class="col-md-3">
+            <input type="checkbox" name="liberar" class="port">
+            <label>Portador de necessidades </label>
+
+            <div class="lib" style="margin-top: 20px;display: none;">
+
+                <input type="radio" name="opcao" value="visual">
+                <label>visual</label>
+
+                <input type="radio" name="opcao" value="motora">
+                <label>motora</label>
+
+                <input type="radio" name="opcao" value="mental">
+                <label>mental</label>
+
+                <input type="radio" name="opcao" value="auditiva">
+                <label>auditiva</label>
+            </div>
+    </div>
+</div>
+
+        <div class="form-group">
+             <label class="col-md-2 control-label" for="arquivos">Arquivos</label>
+                <div class="col-md-5 mb-2">
+                    <input type="file" name="arquivos" multiple  /><br/>
+                </div>
+        </div>
+    
+
+
+
+<div class="form-group">
+      <label class="col-md-2 control-label" for="Cadastrar"></label>
+        <div class="col-md-8">
+            <button  type="Submit" id="Cadastrar" name="Cadastrar" class="btn btn-success">Cadastrar</button>
+            <button id="Cancelar" name="Cancelar" class="btn btn-danger" type="Reset">Cancelar</button>
+        </div>
 </div>
 
 <?php
