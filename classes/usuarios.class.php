@@ -15,42 +15,61 @@ class Usuarios
         $sql->bindValue(":data", $data);
         $sql->execute();
 
+        if(isset($_FILES['arquivos'])){
+            
 
-        
-        if (isset($_FILES['arquivos'])) {
             $arquivos = $_FILES['arquivos'];
+           
 
-            if ($arquivos['error']) {
+            if($arquivos['error']){
+
                 die("Falha no envio do upload");
+
             }
-            if ($arquivos['size'] > 2097153) {
+            if($arquivos['size'] > 2097153){
+
                 die("Arquivo grande upload!! max 2mb");
+
             }
             $pasta = "assets/uploads/";
+
             $nomedoArquivo = $arquivos['name'];
+           
+
             $novonome = uniqid();
-            $extensao = strtolower(pathinfo($nomedoArquivo, PATHINFO_EXTENSION));
+            $extensao = strtolower(pathinfo($nomedoArquivo,PATHINFO_EXTENSION));
 
-            if ($extensao != 'pdf') {
+
+            if($extensao != 'pdf')
                 die("Tipo de arquivo não aceito");
-            }
 
-            $path =  $pasta.$nomedoArquivo.".".$extensao;
+               $path =  $pasta.$nomedoArquivo.".".$extensao;
 
-            $sucesso = move_uploaded_file($arquivos['tmp_name'], $path);
-            if ($sucesso) {
 
-                global $pdo;
-                $sql = 'INSERT INTO inscricao (arquivos)
-                 VALUES(:arquivos)';
-                 $sql = $pdo->prepare($sql);
-                $sql->bindValue(":arquivos", $path);
-                $sql->execute();
-            } else {
-                echo "<p>Falha no Upload!!</p>";
-            }
-        }
+                $sucesso = move_uploaded_file($arquivos['tmp_name'],$path);
+
+                if ($sucesso) {
+                    $sql = $pdo->prepare("INSERT INTO inscricao (arquivos) values (:arquivos)");
+					$sql->bindValue(":arquivos", $path);
+					$sql->execute();
+                   
+                }else{
+                    echo "<p>Falha no Upload!!</p>";
+                }     
+         }
     }
+    public function getALL(){
+        global $pdo;
+        $sql = "SELECT * FROM inscricao";
+        $sql = $pdo->query($sql);
+  
+        if($sql->rowCount() > 0){
+          return $sql->fetchAll();
+        }else{
+          return array();
+        }
+  
+      }
     
 }
 

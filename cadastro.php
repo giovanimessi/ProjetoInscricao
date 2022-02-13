@@ -15,14 +15,8 @@ $u = new Usuarios();
         $dtnasc = addslashes($_POST['dtnasc']);
         $opcao = addslashes($_POST['opcao']);
         $data = addslashes($_POST['data']);
-
-        if(isset($_FILES['arquivos'])){
-
-            $arquivos = $_FILES['arquivos'];
-
-        }else{
-            $arquivos = array();
-        }
+        $arquivos = $_FILES['arquivos'];
+  
 
         $u->cadastrar($nome,$cpf,$dtnasc,$opcao,$data,$arquivos);
 
@@ -30,11 +24,11 @@ $u = new Usuarios();
     }
 
 	?>
-<form  method="POST" action="" enctype="multipart/form-data" id="validator" class="form-horizontal">
+<form  method="POST"  enctype="multipart/form-data" id="validator" class="form-horizontal">
 
 <div class="panel panel-primary">
     <div class="panel-heading">Inscrição</div>
-    
+ 
 
     <div class="panel-body">
 <div class="form-group">
@@ -47,14 +41,14 @@ $u = new Usuarios();
 <div class="form-group">
     <label class="col-md-2 control-label" for="data">Data do Cadastro<h11>*</h11></label>  
             <div class="col-md-2">
-                <input id="dtn" name="data" class="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
+                <input id="dtn" name="data" class="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="date" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
             </div>
  </div>
 
 <div class="form-group">
     <label class="col-md-2 control-label" for="Nome">Nome Completo  <h11>*</h11></label>
     <div class="col-md-8">
-    <input type="text" name="nome" class="form-control input-md" data-rules="min=2" />
+    <input type="text" name="nome" class="form-control input-md" data-rules="min=2" required />
     </div>
 </div>
 
@@ -66,7 +60,7 @@ $u = new Usuarios();
   
   <label class="col-md-1 control-label" for="Nome">Nascimento<h11>*</h11></label>
   <div class="col-md-2">
-     <input id="dtnasc" name="dtnasc" class="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
+     <input id="dtnasc" name="dtnasc" class="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="date" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
   </div>
 
 
@@ -108,7 +102,7 @@ $u = new Usuarios();
 <div class="form-group">
       <label class="col-md-2 control-label" for="Cadastrar"></label>
         <div class="col-md-8">
-            <button  type="Submit" id="Cadastrar" name="Cadastrar" class="btn btn-success">Cadastrar</button>
+            <button  type="submit" id="Cadastrar" name="Cadastrar" class="btn btn-success">Cadastrar</button>
             <button id="Cancelar" name="Cancelar" class="btn btn-danger" type="Reset">Cancelar</button>
         </div>
 </div>

@@ -15,7 +15,7 @@ if(!empty($_POST['codigo'])) {
   $cpf = addslashes($_POST['cpf']);
 
 	if($codigo == $_SESSION['captcha']) {
-    header("Location: cadastro.php");
+    header("Location: dados.php");
 	
 	} else {
 		echo 'digite o código novamente...';

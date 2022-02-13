@@ -37,9 +37,11 @@ body {
   outline: 0;
 }
 
+
 .error{
   font-size: 11px;
-  color: #c31c1c;
+  background-color: #FF0000;
+  color: #FFF;
   padding: 4px;
   border-radius: 5px;
 }
