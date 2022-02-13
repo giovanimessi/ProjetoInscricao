@@ -1,5 +1,8 @@
 <?php
 
+
+global $pdo;
+
 try{
 
 $pdo = new PDO("pgsql:host=localhost;dbname=sysinfo","postgres","java10");
