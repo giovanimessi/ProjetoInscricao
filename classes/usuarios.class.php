@@ -5,21 +5,13 @@ class Usuarios
     public function cadastrar($nome, $cpf, $dtnasc, $opcao, $data, $arquivos)
     {
         global $pdo;
-        $sql = 'INSERT INTO inscricao (nome,  cpf, dtnasc, opcao, data)
-        VALUES(:nome,  :cpf, :dtnasc, :opcao, :data)';
-        $sql = $pdo->prepare($sql);
-        $sql->bindValue(":nome", $nome);
-        $sql->bindValue(":dtnasc", $dtnasc);
-        $sql->bindValue(":opcao", $opcao);
-        $sql->bindValue(":cpf", $cpf);
-        $sql->bindValue(":data", $data);
-        $sql->execute();
+       
 
         if(isset($_FILES['arquivos'])){
-            
+
 
             $arquivos = $_FILES['arquivos'];
-           
+
 
             if($arquivos['error']){
 
@@ -34,7 +26,7 @@ class Usuarios
             $pasta = "assets/uploads/";
 
             $nomedoArquivo = $arquivos['name'];
-           
+
 
             $novonome = uniqid();
             $extensao = strtolower(pathinfo($nomedoArquivo,PATHINFO_EXTENSION));
@@ -49,18 +41,27 @@ class Usuarios
                 $sucesso = move_uploaded_file($arquivos['tmp_name'],$path);
 
                 if ($sucesso) {
-                    $sql = $pdo->prepare("INSERT INTO inscricao (arquivos) values (:arquivos)");
-					$sql->bindValue(":arquivos", $path);
-					$sql->execute();
-                   
+                    $sql = 'INSERT INTO inscricao (nome,  cpf, dtnasc, opcao, data, arquivos)
+                    VALUES(:nome,  :cpf, :dtnasc, :opcao, :data, :arquivos)';
+                    $sql = $pdo->prepare($sql);
+                    $sql->bindValue(":nome", $nome);
+                    $sql->bindValue(":dtnasc", $dtnasc);
+                    $sql->bindValue(":opcao", $opcao);
+                    $sql->bindValue(":cpf", $cpf);
+                    $sql->bindValue(":data", $data);
+                    $sql->bindValue(":arquivos", $arquivos['name']);
+                    $sql->execute();
+
                 }else{
                     echo "<p>Falha no Upload!!</p>";
-                }     
+                }
          }
     }
     public function getALL(){
         global $pdo;
-        $sql = "SELECT * FROM inscricao";
+
+     
+        $sql = "SELECT * FROM inscricao ORDER BY cod_inscricao DESC LIMIT 5";
         $sql = $pdo->query($sql);
   
         if($sql->rowCount() > 0){

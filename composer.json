@@ -1,5 +1,5 @@
 {
     "require": {
-        "php-activerecord/php-activerecord": "^1.2"
+        "mpdf/mpdf": "^8.0"
     }
 }

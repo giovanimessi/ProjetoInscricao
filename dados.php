@@ -31,17 +31,41 @@ $u = new Usuarios();
 
     
    $lista = $u->getALL();
-   var_dump($lista);
+  
+   foreach($lista as $item):?>
+
+    <tr>
+      <td><?php echo $item['cod_inscricao'];?></td>
+      <td><?php echo $item['nome'];?></td>
+      <td><?php echo $item['cpf'];?></td>
+        <td>
+            <a class="btn btn-warning" href="editar.php?id=<?php echo $item['cod_inscricao']; ?>">Editar</a> -
+             <a class="btn btn-danger" href="excluir.php?id=<?php echo $item['cod_inscricao'];?>">Excluir</a>
+             <a target="_blank" class="btn btn-default"  href="comprovante/registro.php?id=<?php echo $item['cod_inscricao']; ?>"><img src="assets/imagem/impressora.png" style="width: 20px;"></a>
+
+
+        </td>
+        <td></td>
+
+    </tr>
+
+
+
+<?php
+
+    endforeach;
 
 
 
     ?>
-
-
-  
   </tbody>
 </table>
       </div>
+      <ul class="pagination">
+				<?php for($q=1;$q<=$total_paginas;$q++): ?>
+				<li class="<?php echo ($p==$q)?'active':''; ?>"><a href="index.php?p=<?php echo $q; ?>"><?php echo $q; ?></a></li>
+				<?php endfor; ?>
+			</ul>
 </fieldset>
 </div>
 <?php
