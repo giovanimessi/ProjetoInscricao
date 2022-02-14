@@ -6,7 +6,7 @@
  $out = '
         <table border="1">
         <tr>
-            <th>teste</th>
+            <th>.name.</th>
             <th>teste</th>
             <th>teste</th>
         </tr>
@@ -29,7 +29,7 @@ $mpdf->WriteHTML($out);
 //$mpdf->Output();
 
 
-$mpdf->Output('arquivoz.pdf','D');
+$mpdf->Output('arquivos.pdf','F');
 
 // $link = 'http://localhost/www/php/projetoPdf/arquivo.pdf';
 

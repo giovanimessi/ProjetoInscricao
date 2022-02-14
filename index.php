@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require 'config.php';
 require 'pages/header.php';
 

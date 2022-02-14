@@ -1,6 +1,6 @@
 <?php
 
-
+session_start();
 global $pdo;
 
 try{

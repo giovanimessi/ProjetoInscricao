@@ -57,3 +57,6 @@ h11 {
 .panel-heading{
   font-size:150%;
 }
+fieldset{
+  margin-top: 40px;
+}
