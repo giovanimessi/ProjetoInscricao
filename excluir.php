@@ -1,6 +1,6 @@
 <?php
 require 'pages/header.php';
-require 'config.php';   
+require 'config.php';
 require 'classes/usuarios.class.php';
 $u = new Usuarios();
 

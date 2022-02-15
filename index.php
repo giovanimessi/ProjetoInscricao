@@ -22,7 +22,7 @@ if(!empty($_POST['codigo'])) {
 	}
 
 
-	$n = rand(10000, 99999);
+	$n = rand(100000, 999999);
 	$_SESSION['captcha'] = $n;
 }
 ?>

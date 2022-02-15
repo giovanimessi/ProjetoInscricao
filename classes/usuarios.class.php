@@ -16,7 +16,7 @@ class Usuarios
 
     public function getInfo($cod_inscricao){
           global $pdo;
-        $sql = "SELECT * FROM inscricao WHERE cod_inscricao = :cod_inscricao";
+        $sql = "SELECT  *, TO_CHAR(data, 'DD-MM-YYYY') as dtcad, TO_CHAR(dtnasc, 'DD-MM-YYYY') as dtnascimento  FROM inscricao WHERE cod_inscricao = :cod_inscricao";
         $sql = $pdo->prepare($sql);
         $sql->bindValue(':cod_inscricao' ,$cod_inscricao);
         $sql->execute();
@@ -50,13 +50,14 @@ class Usuarios
 
             $novonome = uniqid();
             $extensao = strtolower(pathinfo($nomedoArquivo, PATHINFO_EXTENSION));
-
+    
 
             if ($extensao != 'pdf') {
                 die("Tipo de arquivo não aceito");
             }
 
             $path =  $pasta.$nomedoArquivo.".".$extensao;
+            
 
 
             $sucesso = move_uploaded_file($arquivos['tmp_name'], $path);
@@ -70,7 +71,7 @@ class Usuarios
                 $sql->bindValue(":opcao", $opcao);
                 $sql->bindValue(":cpf", $cpf);
                 $sql->bindValue(":data", $data);
-                $sql->bindValue(":arquivos", $arquivos['name']);
+                $sql->bindValue(":arquivos", $path);
                 $sql->execute();
             } else {
                 echo "<p>Falha no Upload!!</p>";

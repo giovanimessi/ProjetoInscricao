@@ -12,13 +12,14 @@ if(empty($_SESSION['captcha'])) {
 require 'classes/usuarios.class.php';
 $u = new Usuarios();
 
-
-
     if(isset($_POST['nome']) && !empty($_POST['nome'])){
+
+        $op = !isset($_POST['opcao']) ? null: $_POST['opcao'];
+
         $nome = addslashes($_POST['nome']);
         $cpf = addslashes($_POST['cpf']);
         $dtnasc = addslashes($_POST['dtnasc']);
-        $opcao = addslashes($_POST['opcao']);
+        $opcao = addslashes($op);
         $data = addslashes($_POST['data']);
         $arquivos = $_FILES['arquivos'];
   
@@ -67,7 +68,6 @@ $u = new Usuarios();
             <div class="col-md-2">
             <input type="text" id="cpf" name="cpf" placeholder="Apenas números" class="form-control input-md" required="" maxlength="14"  Onkeypress="$(this).mask('000.000.000-00');">
             </div>
-                        
             <label class="col-md-1 control-label" for="Nome">Nascimento<h11>*</h11></label>
             <div class="col-md-2">
                 <input id="dtnasc" name="dtnasc" class="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="date" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">

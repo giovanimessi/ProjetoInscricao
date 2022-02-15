@@ -1,6 +1,6 @@
 <?php
 require 'pages/header.php';
-require 'config.php';   
+require 'config.php';
 require 'classes/usuarios.class.php';
 $u = new Usuarios();
 
@@ -10,8 +10,6 @@ if(!empty($_GET['cod_inscricao'])){
 
   $info = $u->getInfo($cod_inscricao);
 
- 
-   
 }
 	?>
    
@@ -70,16 +68,16 @@ if(!empty($_GET['cod_inscricao'])){
 
                     <div class="lib" style="margin-top: 20px;display: none;">
 
-                        <input type="radio" name="opcao" value="visual" value="<?php echo $info['opcao'];?>"/>
+                        <input type="radio" name="opcao" value="visual" class="visual op" value="<?php echo $info['opcao'];?>"/>
                         <label>visual</label>
 
-                        <input type="radio" name="opcao" value="motora" value="<?php echo $info['opcao'];?>"/>
+                        <input type="radio" name="opcao" value="motora" class="motora op" value="<?php echo $info['opcao'];?>"/>
                         <label>motora</label>
 
-                        <input type="radio" name="opcao" value="mental" value="<?php echo $info['opcao'];?>"/>
+                        <input type="radio" name="opcao" value="mental" class="mental op" value="<?php echo $info['opcao'];?>"/>
                         <label>mental</label>
 
-                        <input type="radio" name="opcao" value="auditiva" value="<?php echo $info['opcao'];?>"/>
+                        <input type="radio" name="opcao" value="auditiva" class="auditiva op" value="<?php echo $info['opcao'];?>"/>
                         <label>auditiva</label>
                     </div>
             </div>
@@ -106,3 +104,31 @@ if(!empty($_GET['cod_inscricao'])){
 require "pages/footer.php";
 
 ?>
+<script>
+$(document).ready(function(){
+
+    const opcao = "<?= $info['opcao'] ?>";
+    if(opcao !=''){
+        $(".lib").show();
+        $(".port").attr("checked","checked")
+        $("."+opcao).attr("checked","checked")
+    }
+
+    $(".port").click(function(){
+
+        var checkbox = $(this).is(":checked");
+
+        if (checkbox) {
+            $(".lib").show();
+        }else{
+            $(".lib").hide();
+            $(".op").each(function(i,v){
+                v.checked = false
+            })
+        }
+
+    });
+
+
+})
+</script>
