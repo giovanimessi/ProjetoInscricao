@@ -2,15 +2,14 @@
 
 class Usuarios
 {
+
+
+
     public function getTotalInscritos()
     {
         global $pdo;
-
         $sql = $pdo->query("SELECT COUNT(*) as c FROM inscricao");
         $row = $sql->fetch();
-
-      
-    
         return $row['c'];
     }
 
@@ -73,26 +72,44 @@ class Usuarios
                 $sql->bindValue(":data", $data);
                 $sql->bindValue(":arquivos", $path);
                 $sql->execute();
+
+                header("Location: dados.php");
             } else {
                 echo "<p>Falha no Upload!!</p>";
             }
         }
     }
-    public function getALL($page, $perPage)
+    public function getALL($p, $pagina)
     {
         global $pdo;
 
-        $page = ($page -1) * $perPage;
-       
+        $page = ($p -1) * $pagina;
 
-     
-        $sql = "SELECT * FROM inscricao ORDER BY cod_inscricao DESC LIMIT 5";
+        $sql = "SELECT * FROM inscricao ORDER BY cod_inscricao DESC LIMIT $pagina OFFSET $page ";
         $sql = $pdo->query($sql);
+
+
         if ($sql->rowCount() > 0) {
             return $sql->fetchAll();
         } else {
             return array();
         }
+    }
+
+    public function Editcadastrar($nome,$cpf,$dtnasc,$opcao,$data,$cod_inscricao){
+                global $pdo;
+                $sql = $pdo->prepare("UPDATE inscricao SET nome = :nome,dtnasc =:dtnasc, cpf = :cpf, 
+                opcao = :opcao, data = :data WHERE cod_inscricao = :cod_inscricao");
+                $sql->bindValue(":nome", $nome);
+                $sql->bindValue(":cpf", $cpf);
+                $sql->bindValue(":opcao", $opcao);
+                $sql->bindValue(":data", $data);
+                $sql->bindValue(":dtnasc", $dtnasc);
+                $sql->bindValue(":cod_inscricao", $cod_inscricao);
+                $sql->execute();
+
+                header("Location: dados.php");
+
     }
 
     public function Excluir($cod_inscricao){
@@ -103,8 +120,26 @@ class Usuarios
         $sql->bindValue(':cod_inscricao',$cod_inscricao);
         $sql->execute();
 
-
     }
-    
+
+   public function login($cpf){
+       global $pdo;
+
+		$sql = $pdo->prepare("SELECT cod_inscricao FROM inscricao WHERE cpf = :cpf ");
+		$sql->bindValue(":cpf", $cpf);
+       
+		$sql->execute();
+
+		if($sql->rowCount() > 0) {
+			$dado = $sql->fetch();
+			$_SESSION['captcha'] = $dado['cod_inscricao'];
+             header("Location: dados.php");
+
+		} else {
+			header("Location: cadastro.php");
+		}
+
+
+   }
 
 }

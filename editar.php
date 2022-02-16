@@ -4,20 +4,35 @@ require 'config.php';
 require 'classes/usuarios.class.php';
 $u = new Usuarios();
 
+if (isset($_POST['cpf']) && !empty($_POST['cpf'])) {
 
-if(!empty($_GET['cod_inscricao'])){
-    $cod_inscricao = addslashes($_GET['cod_inscricao']);
+    $op = !isset($_POST['opcao']) ? null : $_POST['opcao'];
 
-  $info = $u->getInfo($cod_inscricao);
+    $nome = addslashes($_POST['nome']);
+    $cpf = addslashes($_POST['cpf']);
+    $dtnasc = addslashes($_POST['dtnasc']);
+    $opcao = addslashes($op);
+    $data = addslashes($_POST['data']);
+
+
+    $u->Editcadastrar($nome, $cpf, $dtnasc, $opcao, $data,$_GET['cod_inscricao']);
 
 }
-	?>
-   
+
+if (!empty($_GET['cod_inscricao'])) {
+    $cod_inscricao = addslashes($_GET['cod_inscricao']);
+
+    $info = $u->getInfo($cod_inscricao);
+
+}
+
+?>
+
 <form  method="POST"  enctype="multipart/form-data" id="validator" class="form-horizontal">
 
         <div class="panel panel-primary">
             <div class="panel-heading">Inscrição - Edição </div>
-        
+
 
             <div class="panel-body">
         <div class="form-group">
@@ -29,21 +44,21 @@ if(!empty($_GET['cod_inscricao'])){
         <div class="form-group">
             <label class="col-md-2 control-label" for="Nome">  <h11></h11></label>
             <div class="col-md-8">
-           <input type="hidden" value="<?php echo $info['cod_inscricao'];?>">
+           <input type="hidden" value="<?php echo $info['cod_inscricao']; ?>">
             </div>
         </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label" for="data">Data do Cadastro<h11>*</h11></label>  
+                <label class="col-md-2 control-label" for="data">Data do Cadastro<h11>*</h11></label>
                         <div class="col-md-2">
-                            <input id="dtn" name="data" class="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="date" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()" value="<?php echo $info['data'];?>">
+                            <input id="dtn" name="data" class="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="date" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()" value="<?php echo $info['data']; ?>">
                         </div>
             </div>
 
         <div class="form-group">
             <label class="col-md-2 control-label" for="Nome">Nome Completo  <h11>*</h11></label>
             <div class="col-md-8">
-            <input type="text" name="nome" class="form-control input-md" data-rules="min=2" required="" value="<?php echo $info['nome'];?>"/>
+            <input type="text" name="nome" class="form-control input-md" data-rules="min=2" required="" value="<?php echo $info['nome']; ?>"/>
             </div>
         </div>
 
@@ -51,13 +66,13 @@ if(!empty($_GET['cod_inscricao'])){
             <label class="col-md-2 control-label" for="Nome">CPF <h11>*</h11></label>
             <div class="col-md-2">
             <input type="text" id="cpf" name="cpf" placeholder="Apenas números" class="form-control input-md" required="" maxlength="14"
-             Onkeypress="$(this).mask('000.000.000-00');" value="<?php echo $info['cpf'];?>"/>
+             Onkeypress="$(this).mask('000.000.000-00');" value="<?php echo $info['cpf']; ?>"/>
             </div>
             <label class="col-md-2 control-label" for="Nome">Data de Nascimento<h11>*</h11></label>
             <div class="col-md-2">
-                <input id="dtnasc" name="dtnasc" class="date" placeholder="DD/MM/AAAA" 
-                class="form-control input-md" required="" type="date" 
-                maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()" value="<?php echo $info['dtnasc'];?>"/>
+                <input id="dtnasc" name="dtnasc" class="date" placeholder="DD/MM/AAAA"
+                class="form-control input-md" required="" type="date"
+                maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()" value="<?php echo $info['dtnasc']; ?>"/>
             </div>
 
 
@@ -68,28 +83,24 @@ if(!empty($_GET['cod_inscricao'])){
 
                     <div class="lib" style="margin-top: 20px;display: none;">
 
-                        <input type="radio" name="opcao" value="visual" class="visual op" value="<?php echo $info['opcao'];?>"/>
+                        <input type="radio" name="opcao" value="visual" class="visual op" value="<?php echo $info['opcao']; ?>"/>
                         <label>visual</label>
 
-                        <input type="radio" name="opcao" value="motora" class="motora op" value="<?php echo $info['opcao'];?>"/>
+                        <input type="radio" name="opcao" value="motora" class="motora op" value="<?php echo $info['opcao']; ?>"/>
                         <label>motora</label>
 
-                        <input type="radio" name="opcao" value="mental" class="mental op" value="<?php echo $info['opcao'];?>"/>
+                        <input type="radio" name="opcao" value="mental" class="mental op" value="<?php echo $info['opcao']; ?>"/>
                         <label>mental</label>
 
-                        <input type="radio" name="opcao" value="auditiva" class="auditiva op" value="<?php echo $info['opcao'];?>"/>
+                        <input type="radio" name="opcao" value="auditiva" class="auditiva op" value="<?php echo $info['opcao']; ?>"/>
                         <label>auditiva</label>
                     </div>
             </div>
+         
         </div>
 
+          
 
-            <div class="form-group">
-                <label class="col-md-2 control-label" for="arquivos">Documentos</label>
-                    <div class="col-md-5 mb-2">
-                    <input type="file" name="arquivos" value="<?php echo $info['arquivos'];?>"/><br/>
-                    </div>
-            </div>
         <div class="form-group">
             <label class="col-md-2 control-label" for="Cadastrar"></label>
                 <div class="col-md-8">
@@ -107,7 +118,7 @@ require "pages/footer.php";
 <script>
 $(document).ready(function(){
 
-    const opcao = "<?= $info['opcao'] ?>";
+    const opcao = "<?=$info['opcao']?>";
     if(opcao !=''){
         $(".lib").show();
         $(".port").attr("checked","checked")

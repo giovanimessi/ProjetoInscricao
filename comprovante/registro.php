@@ -16,6 +16,7 @@ if(!empty($_GET['id'])){
 
 
 $html = '
+<form>
 <h1 style="text-align:center">Comprovante de Inscricão</h1>
 <p>
     <b>Data do contrato: </b> '.$info["dtcad"].'
@@ -30,7 +31,8 @@ $html = '
 </p>
 <p>
     <b>Portador de Necessidades: </b> '.$info["opcao"].'
-</p>';
+</p>
+</form>';
 
 
 

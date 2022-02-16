@@ -14,7 +14,7 @@ $u = new Usuarios();
 <fieldset>
 <div class="panel panel-primary">
     <div class="panel-heading">Dados da Inscrição</div>
-      <div class="container" id="info">
+      <div class="container mt-5" id="info">
      
       <table class="table table-dark">
   <thead>
@@ -29,18 +29,20 @@ $u = new Usuarios();
   <tbody>
   <?php
   $total = $u->getTotalInscritos();
-  
-  
+
 $p = 1;
 if(isset($_GET['p']) && !empty($_GET['p'])) {
 	$p = addslashes($_GET['p']);
-}
-    $pagina = 12;
+
+
+
+}   
+    //quatidade por pagina
+    $pagina = 4;
+
     $total_paginas = ceil($total / $pagina);
 
-   $lista = $u->getALL($p, $pagina);
-  
-  
+    $lista = $u->getALL($p, $pagina);
 
    foreach($lista as $item):?>
 
@@ -49,7 +51,7 @@ if(isset($_GET['p']) && !empty($_GET['p'])) {
       <td><?php echo $item['nome'];?></td>
       <td><?php echo $item['cpf'];?></td>
         <td>
-            <a class="btn btn-warning" href="editar.php?cod_inscricao=<?php echo $item['cod_inscricao']; ?>">Editar</a> -
+            <a class="btn btn-warning" href="editar.php?cod_inscricao=<?php echo $item['cod_inscricao']; ?>">Editar</a> 
              <a target="_blank" class="btn btn-default"  href="comprovante/registro.php?id=<?php echo $item['cod_inscricao']; ?>"><img src="assets/imagem/impressora.png" style="width: 20px;"></a>
 
 
@@ -70,8 +72,8 @@ if(isset($_GET['p']) && !empty($_GET['p'])) {
   </tbody>
 </table>
 <ul class="pagination">
-				<?php for($q=1;$q<=$total_paginas;$q++): ?>
-				<li class="<?php echo ($p==$q)?'active':''; ?>"><a href="dados.php?p=<?php echo $q; ?>"><?php echo $q; ?></a></li>
+				<?php for($q=1;$q<=$total_paginas;$q++):?>
+				<li class="<?php echo ($p==$q)?'active':''; ?>"><a href="dados.php?p=<?php echo $q;?>"><?php echo $q;?></a></li>
 				<?php endfor; ?>
 			</ul>
 

@@ -12,7 +12,7 @@ if(empty($_SESSION['captcha'])) {
 require 'classes/usuarios.class.php';
 $u = new Usuarios();
 
-    if(isset($_POST['nome']) && !empty($_POST['nome'])){
+    if(isset($_POST['cpf']) && !empty($_POST['cpf'])){
 
         $op = !isset($_POST['opcao']) ? null: $_POST['opcao'];
 
@@ -103,12 +103,6 @@ $u = new Usuarios();
                     <input type="file" name="arquivos" /><br/>
                     </div>
             </div>
-
-        
-    
-
-
-
         <div class="form-group">
             <label class="col-md-2 control-label" for="Cadastrar"></label>
                 <div class="col-md-8">

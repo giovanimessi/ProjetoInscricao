@@ -4,6 +4,7 @@
 }
 body {
   margin: 0;
+  background-color: #183944;
 }
 .screen {
   display: flex;
@@ -60,3 +61,8 @@ h11 {
 fieldset{
   margin-top: 40px;
 }
+#info{
+  margin-top: 50px;
+}
+
+
