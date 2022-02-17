@@ -19,9 +19,12 @@ if(!empty($_POST['codigo'])) {
 
   if ($codigo == $_SESSION['captcha']) {
        //ja existe cadastro
+      
        if($u->login($cpf)) {
-         var_dump($u->login($cpf));
+        
         ?>
+        
+      }
         <script type="text/javascript">window.location.href="dados.php";</script>
         <?php
       } else {
@@ -29,6 +32,7 @@ if(!empty($_POST['codigo'])) {
         <div class="alert alert-danger">
         digite o código novamente...
         </div>
+        
         <?php
       }
 
@@ -49,7 +53,7 @@ if(!empty($_POST['codigo'])) {
         <div class="leftside">
 
         <div class="rightside">
-          <h1>Inscricao</h1>
+          <h1 id="texto" style="text-align:center; font-family: initial;">Inscricão</h1>
 
           <form method="POST" action="" class="validator">
             <label>

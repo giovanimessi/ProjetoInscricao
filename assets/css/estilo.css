@@ -64,5 +64,9 @@ fieldset{
 #info{
   margin-top: 50px;
 }
+#texto{
+  text-align: center;
+  font-family: fantasy;
+}
 
 

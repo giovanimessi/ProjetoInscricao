@@ -13,7 +13,7 @@ $u = new Usuarios();
 <div class="form-horizontal">
 <fieldset>
 <div class="panel panel-primary">
-    <div class="panel-heading">Dados da Inscrição</div>
+    <div class="panel-heading" >Dados da Inscrição</div>
       <div class="container mt-5" id="info">
      
       <table class="table table-dark">
@@ -29,6 +29,7 @@ $u = new Usuarios();
   <tbody>
   <?php
   $total = $u->getTotalInscritos();
+  
 
 $p = 1;
 if(isset($_GET['p']) && !empty($_GET['p'])) {

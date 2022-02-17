@@ -3,8 +3,6 @@
 class Usuarios
 {
 
-
-
     public function getTotalInscritos()
     {
         global $pdo;
@@ -73,7 +71,9 @@ class Usuarios
                 $sql->bindValue(":arquivos", $path);
                 $sql->execute();
 
-                header("Location: dados.php");
+                $id = $pdo->lastInsertId();
+
+                header("Location: user.php?id=".$id);
             } else {
                 echo "<p>Falha no Upload!!</p>";
             }
@@ -96,6 +96,21 @@ class Usuarios
         }
     }
 
+    public function getUser($id)
+    {
+        global $pdo;
+
+        $sql = "SELECT * FROM inscricao WHERE cod_inscricao = ".$id." ";
+        $sql = $pdo->query($sql);
+
+
+        if ($sql->rowCount() > 0) {
+            return $sql->fetchAll();
+        } else {
+            return array();
+        }
+    }
+
     public function Editcadastrar($nome,$cpf,$dtnasc,$opcao,$data,$cod_inscricao){
                 global $pdo;
                 $sql = $pdo->prepare("UPDATE inscricao SET nome = :nome,dtnasc =:dtnasc, cpf = :cpf, 
@@ -108,7 +123,7 @@ class Usuarios
                 $sql->bindValue(":cod_inscricao", $cod_inscricao);
                 $sql->execute();
 
-                header("Location: dados.php");
+                header("Location: user.php?id=".$cod_inscricao);
 
     }
 
@@ -122,21 +137,30 @@ class Usuarios
 
     }
 
+    
    public function login($cpf){
+
+      
        global $pdo;
-
-		$sql = $pdo->prepare("SELECT cod_inscricao FROM inscricao WHERE cpf = :cpf ");
-		$sql->bindValue(":cpf", $cpf);
        
-		$sql->execute();
+     
 
+		// $sql = $pdo->prepare("SELECT cod_inscricao FROM inscricao WHERE cpf = :cpf ");
+        $sql = $pdo->prepare("SELECT cod_inscricao FROM inscricao WHERE cpf = :cpf ");
+		$sql->bindValue(":cpf", $cpf);
+		$sql->execute();
+          
 		if($sql->rowCount() > 0) {
-			$dado = $sql->fetch();
-			$_SESSION['captcha'] = $dado['cod_inscricao'];
-             header("Location: dados.php");
+
+
+			 $dado = $sql->fetch();
+			 $_SESSION['captcha'] = $dado['cod_inscricao'];
+
+            header("Location: user.php?id=".$dado['cod_inscricao']);
 
 		} else {
 			header("Location: cadastro.php");
+        
 		}
 
 
