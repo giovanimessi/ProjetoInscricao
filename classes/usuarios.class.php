@@ -2,7 +2,6 @@
 
 class Usuarios
 {
-
     public function getTotalInscritos()
     {
         global $pdo;
@@ -11,19 +10,19 @@ class Usuarios
         return $row['c'];
     }
 
-    public function getInfo($cod_inscricao){
-          global $pdo;
+    public function getInfo($cod_inscricao)
+    {
+        global $pdo;
         $sql = "SELECT  *, TO_CHAR(data, 'DD-MM-YYYY') as dtcad, TO_CHAR(dtnasc, 'DD-MM-YYYY') as dtnascimento  FROM inscricao WHERE cod_inscricao = :cod_inscricao";
         $sql = $pdo->prepare($sql);
-        $sql->bindValue(':cod_inscricao' ,$cod_inscricao);
+        $sql->bindValue(':cod_inscricao', $cod_inscricao);
         $sql->execute();
 
         if ($sql->rowCount() > 0) {
-          return  $sql->fetch();
-      }else{
-        return array();
-      }
-
+            return  $sql->fetch();
+        } else {
+            return array();
+        }
     }
     public function cadastrar($nome, $cpf, $dtnasc, $opcao, $data, $arquivos)
     {
@@ -85,7 +84,7 @@ class Usuarios
 
         $page = ($p -1) * $pagina;
 
-        $sql = "SELECT * FROM inscricao ORDER BY cod_inscricao DESC LIMIT $pagina OFFSET $page ";
+        $sql = "SELECT * FROM inscricao ORDER BY cod_inscricao DESC LIMIT $pagina OFFSET $page  ";
         $sql = $pdo->query($sql);
 
 
@@ -111,59 +110,75 @@ class Usuarios
         }
     }
 
-    public function Editcadastrar($nome,$cpf,$dtnasc,$opcao,$data,$cod_inscricao){
-                global $pdo;
-                $sql = $pdo->prepare("UPDATE inscricao SET nome = :nome,dtnasc =:dtnasc, cpf = :cpf, 
+    public function Editcadastrar($nome, $cpf, $dtnasc, $opcao, $data, $cod_inscricao)
+    {
+        global $pdo;
+        $sql = $pdo->prepare("UPDATE inscricao SET nome = :nome,dtnasc =:dtnasc, cpf = :cpf, 
                 opcao = :opcao, data = :data WHERE cod_inscricao = :cod_inscricao");
-                $sql->bindValue(":nome", $nome);
-                $sql->bindValue(":cpf", $cpf);
-                $sql->bindValue(":opcao", $opcao);
-                $sql->bindValue(":data", $data);
-                $sql->bindValue(":dtnasc", $dtnasc);
-                $sql->bindValue(":cod_inscricao", $cod_inscricao);
-                $sql->execute();
+        $sql->bindValue(":nome", $nome);
+        $sql->bindValue(":cpf", $cpf);
+        $sql->bindValue(":opcao", $opcao);
+        $sql->bindValue(":data", $data);
+        $sql->bindValue(":dtnasc", $dtnasc);
+        $sql->bindValue(":cod_inscricao", $cod_inscricao);
+        $sql->execute();
 
-                header("Location: user.php?id=".$cod_inscricao);
-
+        header("Location: user.php?id=".$cod_inscricao);
     }
 
-    public function Excluir($cod_inscricao){
-      global $pdo;
+    public function Excluir($cod_inscricao)
+    {
+        global $pdo;
 
         $sql = "DELETE FROM inscricao where cod_inscricao = :cod_inscricao";
         $sql = $pdo->prepare($sql);
-        $sql->bindValue(':cod_inscricao',$cod_inscricao);
+        $sql->bindValue(':cod_inscricao', $cod_inscricao);
         $sql->execute();
-
     }
 
     
-   public function login($cpf){
-
-      
-       global $pdo;
+    public function login($cpf)
+    {
+        global $pdo;
        
      
 
-		// $sql = $pdo->prepare("SELECT cod_inscricao FROM inscricao WHERE cpf = :cpf ");
+        // $sql = $pdo->prepare("SELECT cod_inscricao FROM inscricao WHERE cpf = :cpf ");
         $sql = $pdo->prepare("SELECT cod_inscricao FROM inscricao WHERE cpf = :cpf ");
-		$sql->bindValue(":cpf", $cpf);
-		$sql->execute();
+        $sql->bindValue(":cpf", $cpf);
+        $sql->execute();
           
-		if($sql->rowCount() > 0) {
-
-
-			 $dado = $sql->fetch();
-			 $_SESSION['captcha'] = $dado['cod_inscricao'];
+        if ($sql->rowCount() > 0) {
+            $dado = $sql->fetch();
+            $_SESSION['captcha'] = $dado['cod_inscricao'];
 
             header("Location: user.php?id=".$dado['cod_inscricao']);
+        } else {
+            header("Location: cadastro.php");
+        }
+    }
 
-		} else {
-			header("Location: cadastro.php");
+    public function FazerLogin($cpf, $senha)
+    {
+        var_dump('oi');
+        global $pdo;
+
+        $sql = "SELECT * FROM inscricao WHERE cpf = :cpf AND senha = :senha";
+        $sql = $pdo->prepare($sql);
+        $sql->bindValue(":cpf", $cpf);
+        $sql->bindValue(":senha", $senha);
+        $sql->execute();
+
+          
+        if ($sql->rowCount() > 0) {
+            $dado = $sql->fetch();
+            $_SESSION['clogin'] = $dado['cod_inscricao'];
         
-		}
 
-
-   }
-
+            header("Location: dados.php");
+        } else {
+            header("Location: cadastro.php");
+        }
+        
+    }
 }

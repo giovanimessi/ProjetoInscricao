@@ -17,6 +17,12 @@ $item = $u->getUser($id );
 <fieldset>
 <div class="panel panel-primary">
     <div class="panel-heading" >Dados da Inscrição</div>
+      <div class="form-group">
+            <div class="col-md-11 control-label">
+                    <a href="sair.php" class="btn btn-primary">Sair</a>
+                    <p class="help-block"><h11>*</h11> Campo Obrigatório </p>
+            </div>
+        </div>
       <div class="container mt-5" id="info">
      
       <table class="table table-dark">

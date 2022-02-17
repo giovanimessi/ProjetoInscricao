@@ -8,6 +8,7 @@ require 'classes/usuarios.class.php';
 $u = new Usuarios();
 
 
+
 ?>
 
 <div class="form-horizontal">
@@ -30,11 +31,9 @@ $u = new Usuarios();
   <?php
   $total = $u->getTotalInscritos();
   
-
 $p = 1;
 if(isset($_GET['p']) && !empty($_GET['p'])) {
 	$p = addslashes($_GET['p']);
-
 
 
 }   
