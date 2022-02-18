@@ -26,7 +26,7 @@ if (isset($_POST['cpf']) && !empty($_POST['cpf'])) {
           <form method="POST" action="" class="validator">
             <label>
               CPF:<br/>
-              <input type="text" name="cpf" data-rules="max=14" VALUE="396.814.900-96" required="" maxlength="14" autocomplete="off" Onkeypress="$(this).mask('000.000.000-00');">
+              <input type="text" name="cpf" data-rules="required " VALUE="396.814.900-96" required="" maxlength="14" autocomplete="off" Onkeypress="$(this).mask('000.000.000-00');">
              </label>
     
 	         <label>

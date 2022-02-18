@@ -30,7 +30,7 @@ if(!empty($_POST['codigo'])) {
       } else {
         ?>
         <div class="alert alert-danger">
-        digite o código novamente...
+        Digite o código novamente...
         </div>
         
         <?php
@@ -62,7 +62,7 @@ if(!empty($_POST['codigo'])) {
              </label>
     
                <img src="captcha.php" width="150" height="50" />
-	                                                          
+	
 	           <input type="text" name="codigo" autocomplete="off"/><br/><br/>
               <input type="submit" class="btn btn-primary" value="Acessar" />
     

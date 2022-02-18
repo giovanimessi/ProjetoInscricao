@@ -71,6 +71,7 @@ class Usuarios
                 $sql->execute();
 
                 $id = $pdo->lastInsertId();
+               
 
                 header("Location: user.php?id=".$id);
             } else {
@@ -152,11 +153,10 @@ class Usuarios
             $dado = $sql->fetch();
             $_SESSION['captcha'] = $dado['cod_inscricao'];
 
-          
 
             header("Location: user.php?id=".$dado['cod_inscricao']);
         } else {
-            header("Location: index.php");
+            header("Location: cadastro.php");
         }
     }
 

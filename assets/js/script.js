@@ -1,4 +1,5 @@
-	$(".port").click(function(){
+
+$(".port").click(function(){
 
 		var checkbox = $(this).is(":checked");
         console.log(checkbox);
@@ -137,5 +138,6 @@
 			}
 		  };
 		  
-		  let form = document.querySelector('#validator');
+		  let form = document.querySelector('.validator');
 		  form.addEventListener('submit', Validator.handleSubmit);
+		

@@ -66,7 +66,7 @@ $u = new Usuarios();
             <div class="form-group">
             <label class="col-md-2 control-label" for="Nome">CPF <h11>*</h11></label>
             <div class="col-md-2">
-            <input type="text" id="cpf" name="cpf" placeholder="Apenas números" class="form-control input-md" required="" maxlength="14"  Onkeypress="$(this).mask('000.000.000-00');">
+            <input type="text" id="cpf" name="cpf" placeholder="Apenas números" class="form-control input-md"  required="" maxlength="14"  Onkeypress="$(this).mask('000.000.000-00');">
             </div>
             <label class="col-md-1 control-label" for="Nome">Nascimento<h11>*</h11></label>
             <div class="col-md-2">
