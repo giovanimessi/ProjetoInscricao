@@ -1,7 +1,7 @@
 <?php
-
-session_start();
 global $pdo;
+session_start();
+
 
 try{
 

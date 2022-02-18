@@ -7,6 +7,11 @@ require 'config.php';
 require 'classes/usuarios.class.php';
 $u = new Usuarios();
 
+if(empty($_SESSION['captcha'])){
+  header("Location: admin.php");
+}
+
+
 $id = $_GET['id'];
 
 $item = $u->getUser($id );

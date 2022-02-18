@@ -3,9 +3,14 @@ require 'pages/header.php';
 require 'config.php';
 
 
+
+
    
 require 'classes/usuarios.class.php';
 $u = new Usuarios();
+if(empty($_SESSION['clogin'])){
+  header("Location: admin.php");
+}
 
 
 
@@ -15,9 +20,19 @@ $u = new Usuarios();
 <fieldset>
 <div class="panel panel-primary">
     <div class="panel-heading" >Dados da Inscrição</div>
+    
       <div class="container mt-5" id="info">
+      <div class="form-group">
+            <div class="col-md-11 control-label">
+                    <a href="logoff.php" class="btn btn-primary">Sair</a>
+                    
+            </div>
+      </div>
+    
      
       <table class="table table-dark">
+        
+    
   <thead>
   <a href="cadastro.php" class="btn btn-primary mb-4">Cadastrar</a>
     <tr>

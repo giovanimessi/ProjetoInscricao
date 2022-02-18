@@ -62,7 +62,7 @@ if(!empty($_POST['codigo'])) {
              </label>
     
                <img src="captcha.php" width="150" height="50" />
-	                                                          <br/>
+	                                                          
 	           <input type="text" name="codigo" autocomplete="off"/><br/><br/>
               <input type="submit" class="btn btn-primary" value="Acessar" />
     

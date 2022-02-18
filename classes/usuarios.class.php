@@ -152,15 +152,17 @@ class Usuarios
             $dado = $sql->fetch();
             $_SESSION['captcha'] = $dado['cod_inscricao'];
 
+          
+
             header("Location: user.php?id=".$dado['cod_inscricao']);
         } else {
-            header("Location: cadastro.php");
+            header("Location: index.php");
         }
     }
 
     public function FazerLogin($cpf, $senha)
     {
-        var_dump('oi');
+      
         global $pdo;
 
         $sql = "SELECT * FROM inscricao WHERE cpf = :cpf AND senha = :senha";
@@ -173,11 +175,12 @@ class Usuarios
         if ($sql->rowCount() > 0) {
             $dado = $sql->fetch();
             $_SESSION['clogin'] = $dado['cod_inscricao'];
+
         
 
             header("Location: dados.php");
         } else {
-            header("Location: cadastro.php");
+            header("Location: admin.php");
         }
         
     }

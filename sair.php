@@ -1,5 +1,6 @@
 <?php
-session_start();
+require 'config.php';
 unset($_SESSION['captcha']);
-header("Location: ./");
+header("Location: index.php");
+exit;
 ?>

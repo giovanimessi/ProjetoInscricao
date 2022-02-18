@@ -5,9 +5,10 @@ require 'pages/header.php';
 require 'classes/usuarios.class.php';
 $u = new Usuarios();
 
+
 if (isset($_POST['cpf']) && !empty($_POST['cpf'])) {
     $cpf = $_POST['cpf'];
-    $senha = $_POST['senha'];
+    $senha = md5($_POST['senha']);
 
     $u->FazerLogin($cpf, $senha);
 }
